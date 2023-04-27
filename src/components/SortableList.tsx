@@ -6,8 +6,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import { StyleSheet } from 'react-native';
 import { View } from 'react-native';
-import type { Image } from './types';
-import { COL, SIZE, type Positions } from './module';
+import type { Image } from '../types';
+import { COL, SIZE, type Positions } from '../module';
 import { ImageItem } from './ImageItem';
 
 type SortableListProps = {

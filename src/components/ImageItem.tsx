@@ -20,7 +20,7 @@ import {
   COL,
   animationConfig,
   getOrder,
-} from './module';
+} from '../module';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface ImageItemProps {

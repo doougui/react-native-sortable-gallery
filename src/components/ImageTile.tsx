@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { View } from 'react-native';
-import { SIZE } from './module';
+import { SIZE } from '../module';
 import { ImageBackground } from 'react-native';
-import type { Image } from './types';
+import type { Image } from '../types';
 
 export function ImageTile({ item }: { item: Image }) {
   return (

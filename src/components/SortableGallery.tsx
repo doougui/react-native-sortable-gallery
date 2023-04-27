@@ -1,18 +1,19 @@
 import React from 'react';
 import { ImageTile } from './ImageTile';
 import { SortableList } from './SortableList';
-import type { Image } from './types';
+import type { Image } from '../types';
 
 type SortableGalleryProps = {
   items: Image[];
-  isEditable: boolean;
+  isEditing: boolean;
+  cols: number;
 };
 
-export function SortableGallery({ items, isEditable }: SortableGalleryProps) {
+export function SortableGallery({ items, isEditing }: SortableGalleryProps) {
   function handleDragEnd() {}
 
   return (
-    <SortableList editing={isEditable} onDragEnd={handleDragEnd}>
+    <SortableList editing={isEditing} onDragEnd={handleDragEnd}>
       {(items || []).map((image) => (
         <ImageTile key={image.id} item={image} />
       ))}
