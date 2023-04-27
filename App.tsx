@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
-import { SortableGallery } from './src';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SortableGallery } from "./src/SortableGallery";
+import { StyleSheet } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
   return (
@@ -9,28 +9,28 @@ export default function App() {
         <SortableGallery
           items={[
             {
-              id: '1',
-              file_url: 'https://picsum.photos/200',
+              id: "1",
+              file_url: "https://picsum.photos/200",
               order: 1,
             },
             {
-              id: '2',
-              file_url: 'https://picsum.photos/200',
+              id: "2",
+              file_url: "https://picsum.photos/200",
               order: 2,
             },
             {
-              id: '3',
-              file_url: 'https://picsum.photos/200',
+              id: "3",
+              file_url: "https://picsum.photos/200",
               order: 3,
             },
             {
-              id: '4',
-              file_url: 'https://picsum.photos/200',
+              id: "4",
+              file_url: "https://picsum.photos/200",
               order: 4,
             },
             {
-              id: '5',
-              file_url: 'https://picsum.photos/200',
+              id: "5",
+              file_url: "https://picsum.photos/200",
               order: 5,
             },
           ]}

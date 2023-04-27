@@ -1,5 +1,4 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import {
   PanGestureHandler,
   type PanGestureHandlerGestureEvent,
@@ -23,9 +22,8 @@ import {
   getOrder,
 } from './module';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Dimensions } from 'react-native';
 
-type ImageItemProps = {
+interface ImageItemProps {
   children: React.ReactNode;
   id: string;
   positions: Animated.SharedValue<Positions>;
@@ -33,11 +31,11 @@ type ImageItemProps = {
   onDragEnd: (
     diffs: Positions,
     itemBeingEdited: string,
-    newOrder: number
+    newOrder: number,
   ) => void;
   editing: boolean;
   scrollY: Animated.SharedValue<number>;
-};
+}
 
 export function ImageItem({
   children,
@@ -56,7 +54,7 @@ export function ImageItem({
 
   const isGestureActive = useSharedValue(false);
 
-  const position = getPosition(positions.value[id] as number);
+  const position = getPosition(positions.value[id]);
   const translateX = useSharedValue(position.x);
   const translateY = useSharedValue(position.y);
 
@@ -76,11 +74,11 @@ export function ImageItem({
     () => positions.value[id],
     (newOrder) => {
       if (!isGestureActive.value) {
-        const pos = getPosition(newOrder as number);
+        const pos = getPosition(newOrder);
         translateX.value = withTiming(pos.x, animationConfig);
         translateY.value = withTiming(pos.y, animationConfig);
       }
-    }
+    },
   );
 
   const handleGestureEvent = useAnimatedGestureHandler<
@@ -120,11 +118,11 @@ export function ImageItem({
          * Gets the new order based on the shared translation values (x, y)
          * Max value from getOrder needs to be the total amount of items in the list
          */
-        const oldOrder = positions.value[id] as number;
+        const oldOrder = positions.value[id];
         const newOrder = getOrder(
           translateX.value,
           translateY.value,
-          Object.keys(positions.value).length - 1
+          Object.keys(positions.value).length - 1,
         );
 
         /**
@@ -144,10 +142,7 @@ export function ImageItem({
            */
           if (oldOrder > newOrder) {
             Object.keys(newPositions).map((key) => {
-              if (
-                (newPositions[key] as number) < newOrder ||
-                (newPositions[key] as number) >= oldOrder
-              )
+              if (newPositions[key] < newOrder || newPositions[key] >= oldOrder)
                 return newPositions;
 
               newPositions[key] += 1;
@@ -161,10 +156,7 @@ export function ImageItem({
            */
           if (newOrder > oldOrder) {
             Object.keys(newPositions).map((key) => {
-              if (
-                (newPositions[key] as number) > newOrder ||
-                (newPositions[key] as number) <= oldOrder
-              )
+              if (newPositions[key] > newOrder || newPositions[key] <= oldOrder)
                 return newPositions;
 
               newPositions[key] -= 1;
@@ -213,7 +205,7 @@ export function ImageItem({
         if (translateY.value > upperBound) {
           const diff = Math.min(
             translateY.value - upperBound,
-            leftToScrollDown
+            leftToScrollDown,
           );
           scrollY.value += diff;
           scrollTo(scrollView, 0, scrollY.value, false);
@@ -227,7 +219,7 @@ export function ImageItem({
       }
     },
     onEnd: () => {
-      const destination = getPosition(positions.value[id] as number);
+      const destination = getPosition(positions.value[id]);
 
       /**
        * Goes back to the initial position if the position didn't change
@@ -238,7 +230,7 @@ export function ImageItem({
        */
       translateX.value = withTiming(destination.x, animationConfig, () => {
         isGestureActive.value = false;
-        runOnJS(onDragEnd)(positions.value, id, positions.value[id] as number);
+        runOnJS(onDragEnd)(positions.value, id, positions.value[id]);
       });
 
       translateY.value = withTiming(destination.y, animationConfig);

@@ -16,7 +16,7 @@ type SortableListProps = {
   onDragEnd: (
     diff: Positions,
     itemBeingEdited: string,
-    newOrder: number
+    newOrder: number,
   ) => void;
 };
 
@@ -33,8 +33,8 @@ export function SortableList({
       {},
       ...(children
         ? children.map((child, index) => ({ [child.props.item.id]: index }))
-        : [])
-    )
+        : []),
+    ),
   );
 
   /**

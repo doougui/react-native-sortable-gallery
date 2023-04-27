@@ -1,1 +1,0 @@
-export { SortableGallery } from './SortableGallery';
