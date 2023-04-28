@@ -6,9 +6,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import { StyleSheet } from 'react-native';
 import { View } from 'react-native';
-import type { Image } from '../types';
-import { COL, SIZE, type Positions } from '../module';
+import type { Image, Positions } from '../types';
 import { ImageItem } from './ImageItem';
+import { useSortableGallery } from 'contexts/SortableGalleryContext';
 
 type SortableListProps = {
   children: React.ReactElement<{ item: Image }>[];
@@ -27,6 +27,8 @@ export function SortableList({
 }: SortableListProps) {
   const scrollView = useAnimatedRef<Animated.ScrollView>();
   const scrollY = useSharedValue(0);
+
+  const { cols, size } = useSortableGallery();
 
   const positions = useSharedValue<Positions>(
     Object.assign(
@@ -55,14 +57,14 @@ export function SortableList({
            * The component is going to be layouted by us, so we need to force the height
            * of the contentContainerStyle
            *
-           * Example: 6 items, each with a height of 100px,
+           * Example: 6 items, each with a height of 100px,`
            * We divide 6 by the number of columns (3) to get the number of rows
            * And multiply by the size of the item (100) to get the total height
            *
            * 6 / 3 = 2
            * 2 * 100 = 200
            */
-          height: Math.ceil((children?.length ?? 0) / COL) * SIZE,
+          height: Math.ceil((children?.length ?? 0) / cols) * size,
         }}
         showsVerticalScrollIndicator
         scrollEventThrottle={16}
@@ -77,6 +79,7 @@ export function SortableList({
             onDragEnd={onDragEnd}
             positions={positions}
             scrollY={scrollY}
+            cols={cols}
           >
             {child}
           </ImageItem>

@@ -1,4 +1,5 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { useSortableGallery } from 'contexts/SortableGalleryContext';
+import { Dimensions, StyleSheet } from 'react-native';
 import {
   PanGestureHandler,
   type PanGestureHandlerGestureEvent,
@@ -13,15 +14,8 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
-import {
-  SIZE,
-  getPosition,
-  type Positions,
-  COL,
-  animationConfig,
-  getOrder,
-} from '../module';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Cols, Positions } from 'types';
 
 interface ImageItemProps {
   children: React.ReactNode;
@@ -35,6 +29,7 @@ interface ImageItemProps {
   ) => void;
   editing: boolean;
   scrollY: Animated.SharedValue<number>;
+  cols: Cols;
 }
 
 export function ImageItem({
@@ -45,12 +40,15 @@ export function ImageItem({
   scrollY,
   scrollView,
   onDragEnd,
+  cols,
 }: ImageItemProps) {
   const insets = useSafeAreaInsets();
 
+  const { getPosition, getOrder, size, animationConfig } = useSortableGallery();
+
   const containerHeight =
     Dimensions.get('window').height - insets.top - insets.bottom;
-  const contentHeight = (Object.keys(positions.value).length / COL) * SIZE;
+  const contentHeight = (Object.keys(positions.value).length / cols) * size;
 
   const isGestureActive = useSharedValue(false);
 
@@ -176,7 +174,7 @@ export function ImageItem({
          * scrollY.value = what we scrolled already
          */
         const lowerBound = scrollY.value;
-        const upperBound = lowerBound + containerHeight - SIZE;
+        const upperBound = lowerBound + containerHeight - size;
 
         /**
          * Do not allow to scroll more than what is available
@@ -245,8 +243,8 @@ export function ImageItem({
       position: 'absolute',
       top: 0,
       left: 0,
-      width: SIZE,
-      height: SIZE,
+      width: size,
+      height: size,
       zIndex,
       transform: [
         { translateX: translateX.value || 0 },
