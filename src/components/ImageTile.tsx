@@ -1,31 +1,40 @@
 import { useSortableGallery } from 'contexts/SortableGalleryContext';
 import React from 'react';
-import { ImageBackground, StyleSheet, View } from 'react-native';
+import {
+  ImageBackground,
+  ImageStyle,
+  StyleProp,
+  StyleSheet,
+  View,
+} from 'react-native';
 import type { Image } from '../types';
 
-export function ImageTile({ item }: { item: Image }) {
+type ImageTileProps = {
+  item: Image;
+  imageStyle?: StyleProp<ImageStyle>;
+};
+
+export function ImageTile({ item, imageStyle }: ImageTileProps) {
   const { size } = useSortableGallery();
 
   return (
     <View
-      style={[styles.Container, { width: size, height: size }]}
+      style={[styles.container, { width: size, height: size }]}
       pointerEvents="none"
     >
       <ImageBackground
-        style={styles.BackgroundImage}
+        style={styles.backgroundImage}
         source={{ uri: item.file_url }}
-        imageStyle={styles.ImageStyle}
+        imageStyle={[styles.imageStyle, imageStyle]}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  Container: {},
-  BackgroundImage: {
+  container: {},
+  backgroundImage: {
     flex: 1,
   },
-  ImageStyle: {
-    borderRadius: 4,
-  },
+  imageStyle: {},
 });

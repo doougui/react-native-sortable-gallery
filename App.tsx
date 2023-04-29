@@ -34,7 +34,12 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <SortableGallery items={items} cols={3} isEditing />
+        <SortableGallery
+          items={items}
+          cols={3}
+          imageTileStyles={styles.imageTileStyles}
+          isEditing
+        />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -43,5 +48,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  imageTileStyles: {
+    borderRadius: 2,
   },
 });
