@@ -6,7 +6,10 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "lint": "eslint src --max-warnings=0",
+    "prepare": "husky install"
   },
   "dependencies": {
     "expo": "~48.0.15",
@@ -31,7 +34,9 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.32.2",
+    "husky": "^8.0.3",
     "i": "^0.3.7",
+    "lint-staged": "^13.2.2",
     "npm": "^9.6.5",
     "prettier": "^2.8.8",
     "typescript": "^4.9.5"
