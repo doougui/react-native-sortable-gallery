@@ -5,7 +5,7 @@
 
 > A React Native component that allows you to sort a gallery of images
 
-![Demonstration](./assets/demo.gif)
+<img src="./assets/demo.gif" alt="Demo" width="300" />
 
 ## Getting started
 
