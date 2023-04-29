@@ -1,5 +1,6 @@
 {
   "name": "react-native-sortable-gallery",
+  "description": "A React Native component that allows you to sort a gallery of images",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {

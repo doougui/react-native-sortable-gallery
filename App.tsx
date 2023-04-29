@@ -30,6 +30,36 @@ export default function App() {
       file_url: 'https://picsum.photos/200',
       order: 5,
     },
+    {
+      id: '6',
+      file_url: 'https://picsum.photos/200',
+      order: 6,
+    },
+    {
+      id: '7',
+      file_url: 'https://picsum.photos/200',
+      order: 7,
+    },
+    {
+      id: '8',
+      file_url: 'https://picsum.photos/200',
+      order: 8,
+    },
+    {
+      id: '9',
+      file_url: 'https://picsum.photos/200',
+      order: 9,
+    },
+    {
+      id: '10',
+      file_url: 'https://picsum.photos/200',
+      order: 10,
+    },
+    {
+      id: '11',
+      file_url: 'https://picsum.photos/200',
+      order: 11,
+    },
   ];
 
   function handleDragEnd(item: Image) {
